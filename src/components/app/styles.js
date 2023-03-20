@@ -13,5 +13,6 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 16px;
     font-weight: 300;
     color: #333333;
+    box-sizing: border-box;
   }
 `

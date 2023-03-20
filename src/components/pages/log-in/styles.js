@@ -26,11 +26,9 @@ export const UserForm = styled.form`
   box-sizing: border-box;
   padding: 32px;
   width: 409px;
-  height: 382px;
 `;
 
 export const StyledLabel = styled(Label)`
-  box-sizing: border-box;
   min-width: 345px;
   min-width: 300px;
   margin-bottom: 7px;
@@ -38,10 +36,5 @@ export const StyledLabel = styled(Label)`
 `;
 
 export const StyledInput = styled(Input)`
-  box-sizing: border-box;
   min-width: 345px;
-  font-size: 16px;
-  border: 1px solid ${(props) => props.theme.lightgreyColor};
-  border-radius: 4px;
-  padding: 15px;
 `;

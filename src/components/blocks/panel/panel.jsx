@@ -9,7 +9,7 @@ export default function Panel({hotels}) {
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '28px' }}>
         <div>
           <StyledTitle style={{ position: 'relative' }}>Отели</StyledTitle>
-          <Location>Мухосранск</Location>
+          <Location>Москва</Location>
         </div>
         <Date>07 июля 2020</Date>
       </div>

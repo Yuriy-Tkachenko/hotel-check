@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react"
 import { Wrapper, UserForm, StyledLabel, StyledInput } from "./styles";
 import { MainTitle } from "../../ui/title/title";
-import { StyledButton } from "../../ui/button/styles";
+import StyledButton from "../../ui/StyledButton/StyledButton";
+import { AuthContext } from "../../../context";
 
 export default function LogIn() {
   const [email, setEmail] = useState('');
@@ -62,20 +62,29 @@ export default function LogIn() {
     }
   }
 
+  const {isAuth, setIsAuth} = useContext(AuthContext);
+  const login = e => {
+    e.preventDefault();
+    console.log(StyledInput.value)
+    if (emailError === '' && passwordError === '') {
+      setIsAuth(true);
+      localStorage.setItem('auth', 'true')
+    }
+
+  }
+
   return(
-      <Wrapper>
-        <UserForm type="submit">
-          <MainTitle style = {{marginBottom: '32px', textAlign: 'center'}}>Simple Hotel Check</MainTitle>
-          {(emailDirty && emailError) && <div style={{ color: 'red', marginBottom: '10px' }}>{emailError}</div>}
-          <StyledLabel for='login'>Логин</StyledLabel>
-          <StyledInput onChange={e => emailHandler(e)} value={email} onBlur={e => blurHandler(e)} id='login' name='email' type='text' style = {{marginBottom: '24px'}} />
-          {(passwordDirty && passwordError) && <div style={{ color: 'red', marginBottom: '10px' }}>{passwordError}</div>}
-          <StyledLabel for='password'>Пароль</StyledLabel>
-          <StyledInput onChange={e => passwordHandler(e)} value={password} onBlur={e => blurHandler(e)} id='password' name='password' type='password' style = {{marginBottom: '24px'}} />
-          <Link to='/order.html'>
-            <StyledButton disabled={!formValid}>Войти</StyledButton>
-          </Link>
-        </UserForm>
-      </Wrapper>
+    <Wrapper>
+      <UserForm onSubmit={login}>
+        <MainTitle style = {{marginBottom: '32px', textAlign: 'center'}}>Simple Hotel Check</MainTitle>
+        {(emailDirty && emailError) && <div style={{ color: 'red', marginBottom: '10px' }}>{emailError}</div>}
+        <StyledLabel for='login'>Логин</StyledLabel>
+        <StyledInput onChange={e => emailHandler(e)} value={email} onBlur={e => blurHandler(e)} id='login' name='email' type='text' style = {{marginBottom: '24px'}} />
+        {(passwordDirty && passwordError) && <div style={{ color: 'red', marginBottom: '10px' }}>{passwordError}</div>}
+        <StyledLabel for='password'>Пароль</StyledLabel>
+        <StyledInput onChange={e => passwordHandler(e)} value={password} onBlur={e => blurHandler(e)} id='password' name='password' type='password' style = {{marginBottom: '24px'}} />
+        <StyledButton disabled={!formValid}>Войти</StyledButton>
+      </UserForm>
+    </Wrapper>
   )
 }

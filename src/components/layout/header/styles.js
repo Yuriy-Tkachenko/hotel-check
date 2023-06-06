@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import out from "../../../assets/log-out.svg";
 
+
 export const HeaderWrapper = styled.div`
   width: 100%;
   height: 92px;

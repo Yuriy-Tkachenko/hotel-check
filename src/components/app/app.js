@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter } from "react-router-dom";
 import { GlobalStyle } from "./styles";
-import LogIn from "../pages/log-in/log-in";
-import Order from "../pages/order/order";
+import AppRouter from "../AppRouter/AppRouter";
+import { AuthContext } from "../../context/index";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default function App() {
+  const [isAuth, setIsAuth] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (localStorage.getItem('auth')) {
+      setIsAuth(true)
+    }
+    setLoading(false)
+  }, [])
+
   return(
-    <BrowserRouter>
-      <GlobalStyle />
-      <Routes>
-        <Route path="/">
-          <Route index element={<LogIn />} />
-          <Route path="order.html" element={<Order />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <AuthContext.Provider value={{
+      isAuth,
+      setIsAuth, 
+      isLoading
+    }} >
+      <BrowserRouter>
+        <GlobalStyle />
+        <AppRouter />
+      </BrowserRouter>
+    </AuthContext.Provider>
   )
 }
